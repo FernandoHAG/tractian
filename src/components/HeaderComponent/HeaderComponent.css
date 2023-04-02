@@ -1,0 +1,17 @@
+.logo-image {
+  height: 55px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: rgb(0 0 0 / 0%);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 20px 20px 60px 5px #00000087, -20px -20px 20px 4px #ffffff14;
+  margin-top: 16px;
+  margin-right: 55px;
+}
+
+.top-right {
+  position: absolute;
+  right: 15px;
+  top: 0px;
+}

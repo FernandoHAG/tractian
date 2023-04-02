@@ -11,9 +11,7 @@ const api = axios.create({
 function getCompanies() {
   api
     .get("")
-    .then((response) => {
-      console.log(response);
-    })
+    .then((response) => {})
     .catch((error) => {
       Modal.error({
         title: t("companyAPI.errorTitle"),

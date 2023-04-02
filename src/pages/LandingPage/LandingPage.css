@@ -1,0 +1,11 @@
+.bg-color-blue {
+  background-color: #005efa;
+}
+
+.header-height {
+  height: 95px;
+}
+
+.content-style {
+  height: calc(100vh - 162px);
+}

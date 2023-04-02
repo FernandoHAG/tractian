@@ -1,8 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import "./MainCard.css";
 
-function MainCard(props) {
-  return <div className="background">{props.children}</div>;
+class MainCard extends Component {
+  render(props) {
+    return <div className="background">{this.props.children}</div>;
+  }
 }
 
 export default MainCard;
