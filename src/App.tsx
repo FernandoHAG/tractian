@@ -3,7 +3,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import { ConfigProvider, theme } from "antd";
 
 function App() {
-  const { darkAlgorithm } = theme;
+  const { darkAlgorithm /*, defaultAlgorithm*/ } = theme;
   return (
     <ConfigProvider
       theme={{

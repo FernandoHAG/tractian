@@ -12,6 +12,11 @@ const br = {
       labelWorkorders: "ordens de trabalho",
     },
   },
+  footer: {
+    languageSelector: {
+      placeholder: "Idioma",
+    },
+  },
 };
 
 export default br;

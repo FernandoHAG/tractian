@@ -1,4 +1,60 @@
 .background {
-  background-color: #212121;
   height: 100%;
+  background-image: url("../../files/images/tractian_factory.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100vw auto;
+  background-position: 50%;
+  background-color: #005cef;
+  box-shadow: inset -5px -5px 20px 0px #00000073, inset 5px 5px 20px 0px #0000007a;
+}
+
+@media (max-width: 1741px) {
+  .background {
+    background-size: auto 100%;
+  }
+}
+
+.container {
+  position: relative;
+  font-family: sans-serif;
+  padding-top: 40px;
+}
+
+.container .box {
+  width: 60vw;
+  height: 75vh;
+  padding: 1rem;
+  background-color: rgb(6 6 6 / 25%);
+  border: 1px solid rgba(255, 255, 255, 0.222);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(22px);
+  border-radius: 0.7rem;
+  transition: all ease 0.3s;
+}
+
+.container .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container .box .title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.container .box div strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.container .box:hover {
+  box-shadow: 0px 0px 20px 1px #ffbb763f;
+  border: 1px solid rgba(255, 255, 255, 0.454);
+}
+
+.box {
+  margin-right: auto;
+  margin-left: auto;
 }

@@ -12,6 +12,11 @@ const en = {
       labelWorkorders: "Workorders",
     },
   },
+  footer: {
+    languageSelector: {
+      placeholder: "Idiom",
+    },
+  },
 };
 
 export default en;
