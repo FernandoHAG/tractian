@@ -5,7 +5,6 @@ import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
 import "./LandingPage.css";
 import ReactMainScreen from "../../components/ReactMainScreen/ReactMainScreen";
 import { Component } from "react";
-// import { useTranslation } from "react-i18next";
 
 class LandingPage extends Component {
   render() {

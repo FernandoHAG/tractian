@@ -2,16 +2,19 @@
   height: 55px;
   padding-top: 5px;
   padding-bottom: 5px;
-  background: rgb(0 0 0 / 0%);
-  border: none;
-  border-radius: 10px;
-  box-shadow: 20px 20px 60px 5px #00000087, -20px -20px 20px 4px #ffffff14;
   margin-top: 16px;
   margin-right: 55px;
+  border-radius: 20px;
 }
 
 .top-right {
   position: absolute;
   right: 15px;
-  top: 0px;
+  top: 15px;
+}
+
+.box-shadow {
+  background: rgb(0 0 0 / 0%);
+  border: none;
+  box-shadow: 8px 14px 60px 5px #00000087, -20px -7px 20px 4px #ffffff2e, -5px -5px 20px 4px #ffffff2e;
 }
