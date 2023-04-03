@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />}>
             <Route index element={<LandingPage />} />
-            {/* <Route path="*" element={<NoPage />} /> */}
+            <Route path="*" element={<LandingPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -32,6 +32,10 @@
   transition: all ease 0.3s;
 }
 
+.dark-container {
+  background-color: rgba(216, 216, 216, 0.25) !important;
+}
+
 .container .box {
   display: flex;
   flex-direction: column;

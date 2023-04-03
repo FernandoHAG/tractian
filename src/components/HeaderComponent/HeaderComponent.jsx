@@ -6,32 +6,44 @@ import { Avatar, Segmented, Space } from "antd";
 import randonColorGenerator from "../../utils/randonColorGenerator";
 import { useTranslation } from "react-i18next";
 
+const randonColorArrayToKeepThisSection = [
+  randonColorGenerator(),
+  randonColorGenerator(),
+  randonColorGenerator(),
+  randonColorGenerator(),
+  randonColorGenerator(),
+];
+
 function HeaderComponent() {
   const { t } = useTranslation();
 
   const segmentedData = [
     {
-      img: <Avatar style={{ backgroundColor: randonColorGenerator() }} icon={<BankOutlined />}></Avatar>,
+      img: <Avatar style={{ backgroundColor: randonColorArrayToKeepThisSection[0] }} icon={<BankOutlined />}></Avatar>,
       name: t("header.Segmented.labelAssets"),
       value: "assets",
     },
     {
-      img: <Avatar style={{ backgroundColor: randonColorGenerator() }} icon={<DollarOutlined />}></Avatar>,
+      img: (
+        <Avatar style={{ backgroundColor: randonColorArrayToKeepThisSection[1] }} icon={<DollarOutlined />}></Avatar>
+      ),
       name: t("header.Segmented.labelCompanies"),
       value: "companies",
     },
     {
-      img: <Avatar style={{ backgroundColor: randonColorGenerator() }} icon={<TeamOutlined />}></Avatar>,
+      img: <Avatar style={{ backgroundColor: randonColorArrayToKeepThisSection[2] }} icon={<TeamOutlined />}></Avatar>,
       name: t("header.Segmented.labelUnits"),
       value: "units",
     },
     {
-      img: <Avatar style={{ backgroundColor: randonColorGenerator() }} icon={<UserOutlined />}></Avatar>,
+      img: <Avatar style={{ backgroundColor: randonColorArrayToKeepThisSection[3] }} icon={<UserOutlined />}></Avatar>,
       name: t("header.Segmented.labelUsers"),
       value: "users",
     },
     {
-      img: <Avatar style={{ backgroundColor: randonColorGenerator() }} icon={<FileDoneOutlined />}></Avatar>,
+      img: (
+        <Avatar style={{ backgroundColor: randonColorArrayToKeepThisSection[4] }} icon={<FileDoneOutlined />}></Avatar>
+      ),
       name: t("header.Segmented.labelWorkorders"),
       value: "workordes",
     },
