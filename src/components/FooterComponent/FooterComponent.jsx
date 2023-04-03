@@ -1,12 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import "./FooterComponent.css";
 import { Select, Space } from "antd";
 import Flag from "react-world-flags";
-import i18next from "../../idiom/i18n";
-const { t } = i18next;
+import { useDispatch } from "react-redux";
+import { changeIdiom } from "../../redux/idiomSlice";
+import { useTranslation } from "react-i18next";
 
-class FooterComponent extends Component {
-  idiomOptions = [
+function FooterComponent() {
+  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
+
+  function updateIdiom(newIdiom) {
+    dispatch(changeIdiom(newIdiom));
+  }
+
+  const idiomOptions = [
     {
       value: "br",
       label: (
@@ -17,27 +25,27 @@ class FooterComponent extends Component {
       ),
     },
     {
-      value: "en",
+      value: "us",
       label: (
         <Space direction="horizontal">
           <Flag code="USA" height="9" />
-          en
+          us
         </Space>
       ),
     },
   ];
 
-  render() {
-    return (
-      <Space direction="horizontal">
-        <Select
-          className="idiom-selector"
-          options={this.idiomOptions}
-          placeholder={t("footer.languageSelector.placeholder")}
-          placement={"topRight"}
-        />
-      </Space>
-    );
-  }
+  return (
+    <Space direction="horizontal">
+      <Select
+        className="idiom-selector"
+        options={idiomOptions}
+        placeholder={t("footer.languageSelector.placeholder")}
+        placement={"topRight"}
+        onChange={updateIdiom}
+        defaultValue={i18n.language}
+      />
+    </Space>
+  );
 }
 export default FooterComponent;

@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import "./HeaderComponent.css";
 import { BankOutlined, DollarOutlined, TeamOutlined, UserOutlined, FileDoneOutlined } from "@ant-design/icons";
-
 import logoImage from "../../files/images/tractian_logo.jpg";
 import { Avatar, Segmented, Space } from "antd";
-import i18next from "../../idiom/i18n";
 import randonColorGenerator from "../../utils/randonColorGenerator";
-const { t } = i18next;
+import { useTranslation } from "react-i18next";
 
-class HeaderComponent extends Component {
-  segmentedData = [
+function HeaderComponent() {
+  const { t } = useTranslation();
+
+  const segmentedData = [
     {
       img: <Avatar style={{ backgroundColor: randonColorGenerator() }} icon={<BankOutlined />}></Avatar>,
       name: t("header.Segmented.labelAssets"),
@@ -37,8 +37,8 @@ class HeaderComponent extends Component {
     },
   ];
 
-  segmentedOptions() {
-    const data = this.segmentedData.map((value, Index) => {
+  function segmentedOptions() {
+    const data = segmentedData.map((value, Index) => {
       return {
         label: (
           <div style={{ padding: 4 }} key={"main-div-" + Index}>
@@ -52,15 +52,13 @@ class HeaderComponent extends Component {
     return data;
   }
 
-  render() {
-    return (
-      <Space direction="horizontal">
-        <img src={logoImage} className="logo-image box-shadow" alt="Logo" />
-        <Space direction="vertical">
-          <Segmented className="top-right box-shadow" options={this.segmentedOptions()} />
-        </Space>
+  return (
+    <Space direction="horizontal">
+      <img src={logoImage} className="logo-image box-shadow" alt="Logo" />
+      <Space direction="vertical">
+        <Segmented className="top-right box-shadow" options={segmentedOptions()} />
       </Space>
-    );
-  }
+    </Space>
+  );
 }
 export default HeaderComponent;
