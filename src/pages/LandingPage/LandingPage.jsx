@@ -6,6 +6,7 @@ import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
 import "./LandingPage.css";
 import MainCard from "../../components/MainCard/MainCard";
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
+import CardComponent from "../../components/CardComponent/CardComponent";
 
 function LandingPage() {
   const [companies, setCompanies] = useState([]);
@@ -24,7 +25,21 @@ function LandingPage() {
           <HeaderComponent />
         </Header>
         <Content className="content-style">
-          <MainCard>{"Companies: " + companies[0]?.name}</MainCard>
+          <MainCard>
+            <CardComponent
+              title={"titulo"}
+              subtitle={"Sub-titulo"}
+              img={<p>{companies[0]?.name}</p>}
+              editCallBack={() => {
+                console.log("editCallBack");
+              }}
+              deleteCallBack={() => {
+                console.log("deleteCallBack");
+              }}
+            >
+              {"Companies: " + companies[0]?.name}
+            </CardComponent>
+          </MainCard>
         </Content>
         <Footer className="bg-color-blue">
           <FooterComponent />
