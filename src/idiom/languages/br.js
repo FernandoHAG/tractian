@@ -16,6 +16,9 @@ const br = {
     languageSelector: {
       placeholder: "Idioma",
     },
+    themeSelector: {
+      themeLabel: "Tema",
+    },
   },
 };
 

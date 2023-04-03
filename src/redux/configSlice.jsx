@@ -4,19 +4,23 @@ const { changeLanguage } = i18next;
 
 const initialState = {
   idiom: "us",
+  theme: "dark",
 };
 
 export const slice = createSlice({
-  name: "idiom",
+  name: "config",
   initialState: initialState,
   reducers: {
     changeIdiom(state, { payload }) {
       changeLanguage(payload);
       return { ...state, idiom: payload };
     },
+    changeTheme(state, { payload }) {
+      return { ...state, theme: payload };
+    },
   },
 });
 
-export const { changeIdiom } = slice.actions;
-export const selectIdiom = (state) => state.idiom;
+export const { changeIdiom, changeTheme } = slice.actions;
+export const selectConfig = (state) => state.config;
 export default slice.reducer;

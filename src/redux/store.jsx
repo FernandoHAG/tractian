@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import idiomReducer from "./idiomSlice";
+import configReducer from "./configSlice";
 
 export default configureStore({
   reducer: {
-    idiom: idiomReducer,
+    config: configReducer,
   },
 });

@@ -16,6 +16,9 @@ const us = {
     languageSelector: {
       placeholder: "Idiom",
     },
+    themeSelector: {
+      themeLabel: "Theme",
+    },
   },
 };
 
