@@ -7,7 +7,7 @@
 }
 
 .content-style {
-  height: calc(100vh - 162px);
+  height: calc(100vh - 166px);
 }
 
 .background {
@@ -28,10 +28,16 @@
 
 .dark-background {
   height: 100%;
-  background-image: url("../../files/images/tractian_factory_dark");
+  background-image: url("../../files/images/tractian_factory_dark.jpeg");
   background-repeat: no-repeat;
   background-size: 100vw auto;
   background-position: 50%;
   background-color: #005cef;
   box-shadow: inset -5px -5px 20px 0px #00000073, inset 5px 5px 20px 0px #0000007a;
+}
+
+@media (max-width: 1741px) {
+  .dark-background {
+    background-size: auto 100%;
+  }
 }

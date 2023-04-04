@@ -5,6 +5,8 @@ import logoImage from "../../files/images/tractian_logo.jpg";
 import { Avatar, Segmented, Space } from "antd";
 import randonColorGenerator from "../../utils/randonColorGenerator";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { changeSelectedTab } from "../../redux/configSlice";
 
 const randonColorArrayToKeepThisSection = [
   randonColorGenerator(),
@@ -15,6 +17,8 @@ const randonColorArrayToKeepThisSection = [
 ];
 
 function HeaderComponent() {
+  const dispatch = useDispatch();
+  const { selectedTab } = useSelector((state) => state.config);
   const { t } = useTranslation();
 
   const segmentedData = [
@@ -64,11 +68,20 @@ function HeaderComponent() {
     return data;
   }
 
+  function updateSelectedTab(tab) {
+    dispatch(changeSelectedTab(tab));
+  }
+
   return (
     <Space direction="horizontal">
       <img src={logoImage} className="logo-image box-shadow" alt="Logo" />
       <Space direction="vertical">
-        <Segmented className="top-right box-shadow" options={segmentedOptions()} />
+        <Segmented
+          className="top-right box-shadow"
+          options={segmentedOptions()}
+          onChange={updateSelectedTab}
+          value={selectedTab}
+        />
       </Space>
     </Space>
   );
