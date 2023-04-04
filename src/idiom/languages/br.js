@@ -1,12 +1,19 @@
 const br = {
   companyAPI: {
-    errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint GET/companies. A mensagem de erro é:\n\n",
-    errorTitle: "Erro!",
+    get: {
+      errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint GET/companies. A mensagem de erro é:\n\n",
+      errorTitle: "Erro!",
+    },
+    delete: {
+      errorBody:
+        "Um erro ocorreu enquanto tentava acessar a API no endpoint DELETE/companies. A mensagem de erro é:\n\n",
+      errorTitle: "Erro!",
+    },
   },
   header: {
     Segmented: {
       labelAssets: "Ativos",
-      labelCompanies: "Companias",
+      labelCompanies: "Empresas",
       labelUnits: "Unidades",
       labelUsers: "Usuários",
       labelWorkorders: "ordens de trabalho",
@@ -19,6 +26,9 @@ const br = {
     themeSelector: {
       themeLabel: "Tema",
     },
+  },
+  companiesList: {
+    defaultTitle: "Empresa",
   },
 };
 
