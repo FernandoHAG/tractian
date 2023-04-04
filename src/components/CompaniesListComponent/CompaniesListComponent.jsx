@@ -25,25 +25,24 @@ function CompaniesListComponent(porps) {
 
   return (
     <MainCard>
-      <Space direction="vertical">
-        <Space direction="horizontal">
-          {companies.map((company, index) => {
-            return (
-              <CardComponent
-                key={"CardComponent-" + company?.id}
-                title={t("companiesList.defaultTitle")}
-                subtitle={"id: " + company?.id}
-                img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{company?.name}</Title>}
-                editCallBack={() => {
-                  console.log("editCallBack: ");
-                }}
-                deleteCallBack={() => {
-                  deleteCompany(company?.id);
-                }}
-              />
-            );
-          })}
-        </Space>
+      <Title className="title-screen">{t("companiesList.defaultTitle")}</Title>
+      <Space direction="horizontal">
+        {companies.map((company, index) => {
+          return (
+            <CardComponent
+              key={"CardComponent-" + company?.id}
+              title={t("companiesList.defaultTitle")}
+              subtitle={"id: " + company?.id}
+              img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{company?.name}</Title>}
+              editCallBack={() => {
+                console.log("editCallBack: ");
+              }}
+              deleteCallBack={() => {
+                deleteCompany(company?.id);
+              }}
+            />
+          );
+        })}
       </Space>
     </MainCard>
   );

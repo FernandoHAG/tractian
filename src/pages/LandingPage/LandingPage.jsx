@@ -5,8 +5,10 @@ import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
 import "./LandingPage.css";
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import CompaniesListComponent from "../../components/CompaniesListComponent/CompaniesListComponent";
+import { useSelector } from "react-redux";
 
 function LandingPage() {
+  const { theme } = useSelector((state) => state.config);
   return (
     <Space direction="vertical" style={{ width: "100%" }} size={[0, 48]}>
       <Layout>
@@ -14,7 +16,7 @@ function LandingPage() {
           <HeaderComponent />
         </Header>
         <Content className="content-style">
-          <div className="background">
+          <div className={theme === "dark" ? " dark-background" : "background"}>
             <CompaniesListComponent />
           </div>
         </Content>
