@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import companiesService from "../../services/companies.service";
-import CardComponent from "../CardComponent/CardComponent";
-import MainCard from "../MainCard/MainCard";
+import companiesService from "../../../../services/companies.service";
+import CardComponent from "../../../../components/CardComponent/CardComponent";
+import MainCard from "../../../../components/MainCard/MainCard";
 import "./CompaniesListComponent.css";
 import Title from "antd/es/typography/Title";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,7 @@ import { Space } from "antd";
 function CompaniesListComponent(porps) {
   const { t } = useTranslation();
   const [companies, setCompanies] = useState([]);
-  const companisCallAPI = async () => {
+  const companiesCallAPI = async () => {
     setCompanies(await companiesService.getCompanies());
   };
 
@@ -20,7 +20,7 @@ function CompaniesListComponent(porps) {
   };
 
   useEffect(() => {
-    companisCallAPI();
+    companiesCallAPI();
   }, []);
 
   return (

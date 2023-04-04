@@ -11,19 +11,18 @@ const api = axios.create({
 async function getCompanies() {
   const response = await api.get("").catch((error) => {
     Modal.error({
-      title: t("companyAPI.get.errorTitle"),
-      content: t("companyAPI.get.errorBody") + error.message,
+      title: t("api.companies.get.errorTitle"),
+      content: t("api.companies.get.errorBody") + error.message,
     });
   });
   return response.data;
 }
 
 async function deleteCompanies(id) {
-  console.log(api.getUri() + "/" + id);
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
-      title: t("companyAPI.delete.errorTitle"),
-      content: t("companyAPI.delete.errorBody") + error.message,
+      title: t("api.companies.delete.errorTitle"),
+      content: t("api.companies.delete.errorBody") + error.message,
     });
   });
   return response.data;

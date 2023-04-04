@@ -7,7 +7,9 @@ function MainCard(props) {
   const { theme } = useSelector((state) => state.config);
   return (
     <div className="container">
-      <Card className={"box" + (theme === "light" ? " dark-container" : "")}>{props.children}</Card>
+      <Card className={"box" + (theme === "light" ? " dark-container" : "")}>
+        <div className="align-center">{props.children}</div>
+      </Card>
     </div>
   );
 }

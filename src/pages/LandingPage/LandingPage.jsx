@@ -4,17 +4,16 @@ import { Content, Footer, Header } from "antd/es/layout/layout";
 import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
 import "./LandingPage.css";
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
-import CompaniesListComponent from "../../components/CompaniesListComponent/CompaniesListComponent";
+import CompaniesListComponent from "./components/CompaniesListComponent/CompaniesListComponent";
 import { useSelector } from "react-redux";
-import MainCard from "../../components/MainCard/MainCard";
+import AssetsListComponent from "./components/AssetsListComponent/AssetsListComponent";
+import UnitsListComponent from "./components/UnitsListComponent/UnitsListComponent";
+import UsersListComponent from "./components/UsersListComponent/UsersListComponent";
+import WorkordersListComponent from "./components/WorkordersListComponent/WorkordersListComponent";
 
 function LandingPage() {
   const { theme, selectedTab } = useSelector((state) => state.config);
   let crouselRef;
-
-  useEffect(() => {
-    console.log(crouselRef);
-  }, [crouselRef]);
 
   useEffect(() => {
     const dontAnimate = false;
@@ -53,16 +52,11 @@ function LandingPage() {
                 crouselRef = node;
               }}
             >
-              {/* Assets */}
-              <MainCard />
-              {/* Companies */}
+              <AssetsListComponent />
               <CompaniesListComponent />
-              {/* Units */}
-              <MainCard />
-              {/* Users */}
-              <MainCard />
-              {/* Workorders */}
-              <MainCard />
+              <UnitsListComponent />
+              <UsersListComponent />
+              <WorkordersListComponent />
             </Carousel>
           </div>
         </Content>
