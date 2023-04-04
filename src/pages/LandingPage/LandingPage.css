@@ -9,3 +9,19 @@
 .content-style {
   height: calc(100vh - 162px);
 }
+
+.background {
+  height: 100%;
+  background-image: url("../../files/images/tractian_factory.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100vw auto;
+  background-position: 50%;
+  background-color: #005cef;
+  box-shadow: inset -5px -5px 20px 0px #00000073, inset 5px 5px 20px 0px #0000007a;
+}
+
+@media (max-width: 1741px) {
+  .background {
+    background-size: auto 100%;
+  }
+}
