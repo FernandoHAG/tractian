@@ -6,6 +6,7 @@ import "./UnitsListComponent.css";
 import Title from "antd/es/typography/Title";
 import { useTranslation } from "react-i18next";
 import { Space } from "antd";
+import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
 
 function UnitsListComponent(porps) {
   const { t } = useTranslation();
@@ -23,26 +24,30 @@ function UnitsListComponent(porps) {
     unitsCallAPI();
   }, []);
 
+  const generateCard = () => {
+    return units.map((unit, index) => {
+      return (
+        <CardComponent
+          key={"CardComponent-" + unit?.id}
+          title={t("unitsList.defaultTitle")}
+          subtitle={"id: " + unit?.id}
+          img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{unit?.name}</Title>}
+          editCallBack={() => {
+            console.log("editCallBack: ");
+          }}
+          deleteCallBack={() => {
+            deleteUnit(unit?.id);
+          }}
+        />
+      );
+    });
+  };
+
   return (
     <MainCard>
       <Title className="title-screen">{t("unitsList.defaultTitle")}</Title>
       <Space direction="horizontal">
-        {units.map((unit, index) => {
-          return (
-            <CardComponent
-              key={"CardComponent-" + unit?.id}
-              title={t("unitsList.defaultTitle")}
-              subtitle={"id: " + unit?.id}
-              img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{unit?.name}</Title>}
-              editCallBack={() => {
-                console.log("editCallBack: ");
-              }}
-              deleteCallBack={() => {
-                deleteUnit(unit?.id);
-              }}
-            />
-          );
-        })}
+        <MainCardPagination cards={generateCard()} />
       </Space>
     </MainCard>
   );
