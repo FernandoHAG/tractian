@@ -11,6 +11,11 @@ const br = {
           "Um erro ocorreu enquanto tentava acessar a API no endpoint DELETE/companies. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
+      put: {
+        errorBody:
+          "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/companies. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
     },
     assets: {
       get: {
@@ -56,7 +61,6 @@ const br = {
       },
     },
   },
-
   header: {
     Segmented: {
       labelAssets: "Ativos",
@@ -88,6 +92,16 @@ const br = {
   },
   workordersList: {
     defaultTitle: "Orden",
+  },
+
+  form: {
+    companies: {
+      modalTitleNew: "Nova Empresa",
+      modalTitleEdit: "Editar Empresa",
+      nameLabel: "Nome da Empresa",
+      nameErrorMessage: "Por favor, informe o nome da empresa!",
+      namePlaceholder: "Digite o nome da empresa",
+    },
   },
 };
 

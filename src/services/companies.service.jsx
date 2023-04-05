@@ -18,7 +18,7 @@ async function getCompanies() {
   return response.data;
 }
 
-async function deleteCompanies(id) {
+async function deleteCompany(id) {
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
       title: t("api.companies.delete.errorTitle"),
@@ -28,5 +28,27 @@ async function deleteCompanies(id) {
   return response.data;
 }
 
-const companiesService = { getCompanies, deleteCompanies };
+async function postCompanies(newCompany) {
+  const response = await api.post("", newCompany).catch((error) => {
+    Modal.error({
+      title: t("api.companies.POST.errorTitle"),
+      content: t("api.companies.POST.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+// TODO - Discover what the back wants to recive
+async function putCompany(newCompany) {
+  console.log("PUT-> ", newCompany);
+  // const response = await api.put("", { data: newCompany }).catch((error) => {
+  //   Modal.error({
+  //     title: t("api.companies.put.errorTitle"),
+  //     content: t("api.companies.put.errorBody") + error.message,
+  //   });
+  // });
+  // return response.data;
+}
+
+const companiesService = { getCompanies, deleteCompany, postCompanies, putCompany };
 export default companiesService;
