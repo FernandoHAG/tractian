@@ -1,5 +1,20 @@
 const br = {
   api: {
+    assets: {
+      get: {
+        errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint GET/assets. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
+      delete: {
+        errorBody:
+          "Um erro ocorreu enquanto tentava acessar a API no endpoint DELETE/assets. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
+      put: {
+        errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/assets. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
+    },
     companies: {
       get: {
         errorBody:
@@ -17,17 +32,6 @@ const br = {
         errorTitle: "Erro!",
       },
     },
-    assets: {
-      get: {
-        errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint GET/assets. A mensagem de erro é:\n\n",
-        errorTitle: "Erro!",
-      },
-      delete: {
-        errorBody:
-          "Um erro ocorreu enquanto tentava acessar a API no endpoint DELETE/assets. A mensagem de erro é:\n\n",
-        errorTitle: "Erro!",
-      },
-    },
     units: {
       get: {
         errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint GET/units. A mensagem de erro é:\n\n",
@@ -35,6 +39,10 @@ const br = {
       },
       delete: {
         errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint DELETE/units. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
+      put: {
+        errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/units. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
     },
@@ -47,6 +55,10 @@ const br = {
         errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint DELETE/users. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
+      put: {
+        errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/users. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
     },
     workorders: {
       get: {
@@ -57,6 +69,11 @@ const br = {
       delete: {
         errorBody:
           "Um erro ocorreu enquanto tentava acessar a API no endpoint DELETE/workordes. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
+      put: {
+        errorBody:
+          "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/workorders. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
     },
@@ -93,14 +110,41 @@ const br = {
   workordersList: {
     defaultTitle: "Orden",
   },
-
   form: {
+    assets: {
+      modalTitleNew: "Novo Ativo",
+      modalTitleEdit: "Editar Ativo",
+      nameLabel: "Nome do Ativo",
+      nameErrorMessage: "Por favor, informe o nome do ativo!",
+      namePlaceholder: "Digite o nome do ativo",
+    },
     companies: {
-      modalTitleNew: "Nova Empresa",
-      modalTitleEdit: "Editar Empresa",
-      nameLabel: "Nome da Empresa",
+      modalTitleNew: "Nova empresa",
+      modalTitleEdit: "Editar empresa",
+      nameLabel: "Nome da empresa",
       nameErrorMessage: "Por favor, informe o nome da empresa!",
       namePlaceholder: "Digite o nome da empresa",
+    },
+    units: {
+      modalTitleNew: "Nova unidade",
+      modalTitleEdit: "Editar unidade",
+      nameLabel: "Nome da unidade",
+      nameErrorMessage: "Por favor, informe o nome da unidade!",
+      namePlaceholder: "Digite o nome da unidade",
+    },
+    users: {
+      modalTitleNew: "Nova usuário",
+      modalTitleEdit: "Editar usuário",
+      nameLabel: "Nome do usuário",
+      nameErrorMessage: "Por favor, informe o nome do usuário!",
+      namePlaceholder: "Digite o nome do usuário",
+    },
+    workorders: {
+      modalTitleNew: "Nova ordem de trabalho",
+      modalTitleEdit: "Editar ordem de trabalho",
+      nameLabel: "Nome da ordem de trabalho",
+      nameErrorMessage: "Por favor, informe o nome da ordem de trabalho!",
+      namePlaceholder: "Digite o nome da ordem de trabalho",
     },
   },
 };
