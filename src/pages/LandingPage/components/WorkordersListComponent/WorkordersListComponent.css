@@ -4,3 +4,11 @@
   margin-top: 0px;
   width: fit-content;
 }
+
+.add-button {
+  position: absolute !important;
+  right: 16px !important;
+  bottom: 16px !important;
+  width: fit-content;
+  margin: 0px;
+}

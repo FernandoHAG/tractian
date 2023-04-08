@@ -5,17 +5,38 @@ import MainCard from "../../../../components/MainCard/MainCard";
 import "./AssetsListComponent.css";
 import Title from "antd/es/typography/Title";
 import { useTranslation } from "react-i18next";
-import { Space } from "antd";
+import { Button, Space } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
+import PopupModal from "./components/PopupModal/PopupModal";
 
 function AssetsListComponent(porps) {
   const { t } = useTranslation();
   const [assets, setAssets] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [assetToEdit, setAssetToEdit] = useState(null);
+
+  const handleCloseModal = () => {
+    setAssetToEdit(null);
+    setIsModalVisible(false);
+  };
+
+  const handleCreateAsset = async (newAsset) => {
+    await assetsService.postAsset(newAsset);
+    setAssets(await assetsService.getAssets());
+    handleCloseModal();
+  };
+
+  const handleEditAsset = async (editedAsset) => {
+    await assetsService.patchAsset(editedAsset);
+    handleCloseModal();
+  };
+
   const assetsCallAPI = async () => {
     setAssets(await assetsService.getAssets());
   };
 
-  const deleteCompany = async (id) => {
+  const deleteAsset = async (id) => {
     await assetsService.deleteAsset(id);
     setAssets(await assetsService.getAssets());
   };
@@ -25,19 +46,21 @@ function AssetsListComponent(porps) {
   }, []);
 
   const generateCard = () => {
-    return assets.map((company, index) => {
+    return assets.map((asset, index) => {
       return (
         <CardComponent
-          key={"CardComponent-" + company?.id}
+          key={"CardComponent-" + asset?.id}
           title={t("assetsList.defaultTitle")}
-          subtitle={"id: " + company?.id}
-          img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{company?.name}</Title>}
+          subtitle={"id: " + asset?.id}
+          img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{asset?.name}</Title>}
           editCallBack={() => {
-            console.log("editCallBack: ");
+            setAssetToEdit(asset);
+            setIsModalVisible(true);
           }}
           deleteCallBack={() => {
-            deleteCompany(company?.id);
+            deleteAsset(asset?.id);
           }}
+          id={asset?.id}
         />
       );
     });
@@ -45,10 +68,21 @@ function AssetsListComponent(porps) {
 
   return (
     <MainCard>
+      <div className="add-button">
+        <Button type="primary" shape="circle" onClick={() => setIsModalVisible(true)} icon={<PlusCircleOutlined />} />
+      </div>
       <Title className="title-screen">{t("assetsList.defaultTitle")}</Title>
       <Space direction="horizontal">
         <MainCardPagination cards={generateCard()} />
       </Space>
+      <PopupModal
+        open={isModalVisible}
+        onCancel={handleCloseModal}
+        onOk={handleCreateAsset}
+        onEdit={handleEditAsset}
+        onClose={handleCloseModal}
+        asset={assetToEdit}
+      />
     </MainCard>
   );
 }

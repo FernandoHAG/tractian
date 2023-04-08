@@ -5,12 +5,33 @@ import MainCard from "../../../../components/MainCard/MainCard";
 import "./UsersListComponent.css";
 import Title from "antd/es/typography/Title";
 import { useTranslation } from "react-i18next";
-import { Space } from "antd";
+import { Button, Space } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
+import PopupModal from "./components/PopupModal/PopupModal";
 
 function UsersListComponent(porps) {
   const { t } = useTranslation();
   const [users, setUsers] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [userToEdit, setUserToEdit] = useState(null);
+
+  const handleCloseModal = () => {
+    setUserToEdit(null);
+    setIsModalVisible(false);
+  };
+
+  const handleCreateUser = async (newUser) => {
+    await usersService.postUser(newUser);
+    setUsers(await usersService.getUsers());
+    handleCloseModal();
+  };
+
+  const handleEditUser = async (editedUser) => {
+    await usersService.patchUser(editedUser);
+    handleCloseModal();
+  };
+
   const usersCallAPI = async () => {
     setUsers(await usersService.getUsers());
   };
@@ -33,11 +54,13 @@ function UsersListComponent(porps) {
           subtitle={"id: " + user?.id}
           img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{user?.name}</Title>}
           editCallBack={() => {
-            console.log("editCallBack: ");
+            setUserToEdit(user);
+            setIsModalVisible(true);
           }}
           deleteCallBack={() => {
             deleteUser(user?.id);
           }}
+          id={user?.id}
         />
       );
     });
@@ -45,10 +68,21 @@ function UsersListComponent(porps) {
 
   return (
     <MainCard>
+      <div className="add-button">
+        <Button type="primary" shape="circle" onClick={() => setIsModalVisible(true)} icon={<PlusCircleOutlined />} />
+      </div>
       <Title className="title-screen">{t("usersList.defaultTitle")}</Title>
       <Space direction="horizontal">
         <MainCardPagination cards={generateCard()} />
       </Space>
+      <PopupModal
+        open={isModalVisible}
+        onCancel={handleCloseModal}
+        onOk={handleCreateUser}
+        onEdit={handleEditUser}
+        onClose={handleCloseModal}
+        user={userToEdit}
+      />
     </MainCard>
   );
 }
