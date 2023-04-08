@@ -1,44 +1,46 @@
 import { Form, Input, Modal } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 function PopupModal(props) {
-  const { visible, onCancel, onOk, onEdit, company } = props;
   const { t } = useTranslation();
   const [form] = Form.useForm();
-  // const [loading, setLoading] = useState(false); //TODO - add some response to the user while loading, maybe do it on CompaniesListComponent with modal and that alert thing of ant
 
   const handleOk = async () => {
     try {
-      // setLoading(true);
       if (await form.validateFields()) {
         const values = form.getFieldsValue();
-        console.log(company);
-        if (company) {
+        if (props.company) {
+          console.log(props.company);
           const editedCompany = {
-            id: company.id,
+            id: props.company.id,
             name: values.name,
           };
-          await onEdit(editedCompany);
+          await props.onEdit(editedCompany);
         } else {
-          await onOk(values);
+          await props.onOk(values);
         }
       }
     } catch (error) {
       console.log(error);
-      // setLoading(false);
     } finally {
       form.resetFields();
-      // setLoading(false);
     }
   };
 
+  useEffect(() => {
+    form.setFieldsValue({
+      name: props.company ? props.company.name : undefined,
+    });
+  }, [form, props.company]);
+
   return (
     <Modal
-      title={company ? t("form.companies.modalTitleEdit") : t("form.companies.modalTitleNew")}
-      visible={visible}
-      onCancel={onCancel}
+      title={props.company ? t("form.companies.modalTitleEdit") : t("form.companies.modalTitleNew")}
+      open={props.open}
+      onCancel={props.onCancel}
       onOk={handleOk}
+      afterClose={props.onClose}
     >
       <Form form={form} layout="vertical">
         <Form.Item
@@ -51,7 +53,7 @@ function PopupModal(props) {
             },
           ]}
         >
-          <Input placeholder={t("form.companies.namePlaceholder")} value={company?.name} />
+          <Input placeholder={t("form.companies.namePlaceholder")} />
         </Form.Item>
       </Form>
     </Modal>

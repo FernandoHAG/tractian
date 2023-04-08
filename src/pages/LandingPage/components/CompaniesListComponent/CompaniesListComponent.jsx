@@ -16,13 +16,9 @@ function CompaniesListComponent(porps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [companyToEdit, setCompanyToEdit] = useState(null);
 
-  const handleOpenModal = () => {
-    setIsModalVisible(true);
-  };
-
   const handleCloseModal = () => {
-    setIsModalVisible(false);
     setCompanyToEdit(null);
+    setIsModalVisible(false);
   };
 
   const handleCreateCompany = async (newCompany) => {
@@ -45,11 +41,6 @@ function CompaniesListComponent(porps) {
     setCompanies(await companiesService.getCompanies());
   };
 
-  const editCompany = async (selectedCompany) => {
-    setCompanyToEdit(selectedCompany);
-    handleOpenModal();
-  };
-
   useEffect(() => {
     companiesCallAPI();
   }, []);
@@ -63,7 +54,8 @@ function CompaniesListComponent(porps) {
           subtitle={"id: " + company?.id}
           img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{company?.name}</Title>}
           editCallBack={() => {
-            editCompany(company);
+            setCompanyToEdit(company);
+            setIsModalVisible(true);
           }}
           deleteCallBack={() => {
             deleteCompany(company?.id);
@@ -77,17 +69,18 @@ function CompaniesListComponent(porps) {
   return (
     <MainCard>
       <div className="add-button">
-        <Button type="primary" shape="circle" onClick={handleOpenModal} icon={<PlusCircleOutlined />} />
+        <Button type="primary" shape="circle" onClick={() => setIsModalVisible(true)} icon={<PlusCircleOutlined />} />
       </div>
       <Title className="title-screen">{t("companiesList.defaultTitle")}</Title>
       <Space direction="horizontal">
         <MainCardPagination cards={generateCard()} />
       </Space>
       <PopupModal
-        visible={isModalVisible}
+        open={isModalVisible}
         onCancel={handleCloseModal}
         onOk={handleCreateCompany}
         onEdit={handleEditCompany}
+        onClose={handleCloseModal}
         company={companyToEdit}
       />
     </MainCard>
