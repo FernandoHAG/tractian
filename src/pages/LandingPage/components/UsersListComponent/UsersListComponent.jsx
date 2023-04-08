@@ -16,7 +16,7 @@ function UsersListComponent(porps) {
   };
 
   const deleteUser = async (id) => {
-    await usersService.deleteUsers(id);
+    await usersService.deleteUser(id);
     setUsers(await usersService.getUsers());
   };
 

@@ -16,7 +16,7 @@ function UnitsListComponent(porps) {
   };
 
   const deleteUnit = async (id) => {
-    await unitsService.deleteUnits(id);
+    await unitsService.deleteUnit(id);
     setUnits(await unitsService.getUnits());
   };
 

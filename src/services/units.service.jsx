@@ -18,7 +18,7 @@ async function getUnits() {
   return response.data;
 }
 
-async function deleteUnits(id) {
+async function deleteUnit(id) {
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
       title: t("api.units.delete.errorTitle"),
@@ -28,5 +28,37 @@ async function deleteUnits(id) {
   return response.data;
 }
 
-const unitsService = { getUnits, deleteUnits };
+async function postUnit(newUnit) {
+  const response = await api.post("", newUnit).catch((error) => {
+    Modal.error({
+      title: t("api.units.post.errorTitle"),
+      content: t("api.units.post.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+// TODO - Discover what the back wants to recive
+async function putUnit(asset) {
+  const response = await api.put("", { data: asset }).catch((error) => {
+    Modal.error({
+      title: t("api.units.put.errorTitle"),
+      content: t("api.units.put.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+// TODO - Discover what the back wants to recive
+async function patchUnit(asset) {
+  const response = await api.patch("", asset).catch((error) => {
+    Modal.error({
+      title: t("api.units.patch.errorTitle"),
+      content: t("api.units.patch.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+const unitsService = { getUnits, deleteUnit, postUnit, putUnit, patchUnit };
 export default unitsService;

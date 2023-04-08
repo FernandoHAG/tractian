@@ -16,7 +16,7 @@ function WorkordersListComponent(porps) {
   };
 
   const deleteWorkorder = async (id) => {
-    await workordersService.deleteWorkorders(id);
+    await workordersService.deleteWorkorder(id);
     setWorkorders(await workordersService.getWorkorders());
   };
 

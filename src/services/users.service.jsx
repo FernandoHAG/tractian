@@ -18,7 +18,7 @@ async function getUsers() {
   return response.data;
 }
 
-async function deleteUsers(id) {
+async function deleteUser(id) {
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
       title: t("api.users.delete.errorTitle"),
@@ -28,5 +28,37 @@ async function deleteUsers(id) {
   return response.data;
 }
 
-const usersService = { getUsers, deleteUsers };
+async function postUser(newUser) {
+  const response = await api.post("", newUser).catch((error) => {
+    Modal.error({
+      title: t("api.users.post.errorTitle"),
+      content: t("api.users.post.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+// TODO - Discover what the back wants to recive
+async function putUser(user) {
+  const response = await api.put("", { data: user }).catch((error) => {
+    Modal.error({
+      title: t("api.users.put.errorTitle"),
+      content: t("api.users.put.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+// TODO - Discover what the back wants to recive
+async function patchUser(user) {
+  const response = await api.patch("", user).catch((error) => {
+    Modal.error({
+      title: t("api.users.patch.errorTitle"),
+      content: t("api.users.patch.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+const usersService = { getUsers, deleteUser, postUser, putUser, patchUser };
 export default usersService;

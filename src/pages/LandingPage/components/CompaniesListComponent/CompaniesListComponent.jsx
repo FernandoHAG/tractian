@@ -22,7 +22,7 @@ function CompaniesListComponent(porps) {
   };
 
   const handleCreateCompany = async (newCompany) => {
-    await companiesService.postCompanies(newCompany);
+    await companiesService.postCompany(newCompany);
     setCompanies(await companiesService.getCompanies());
     handleCloseModal();
   };

@@ -18,7 +18,7 @@ async function getAssets() {
   return response.data;
 }
 
-async function deleteAssets(id) {
+async function deleteAsset(id) {
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
       title: t("api.assets.delete.errorTitle"),
@@ -28,5 +28,37 @@ async function deleteAssets(id) {
   return response.data;
 }
 
-const assetsService = { getAssets, deleteAssets };
+async function postAsset(newAsset) {
+  const response = await api.post("", newAsset).catch((error) => {
+    Modal.error({
+      title: t("api.assets.post.errorTitle"),
+      content: t("api.assets.post.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+// TODO - Discover what the back wants to recive
+async function putAsset(asset) {
+  const response = await api.put("", { data: asset }).catch((error) => {
+    Modal.error({
+      title: t("api.assets.put.errorTitle"),
+      content: t("api.assets.put.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+// TODO - Discover what the back wants to recive
+async function patchAsset(asset) {
+  const response = await api.patch("", asset).catch((error) => {
+    Modal.error({
+      title: t("api.assets.patch.errorTitle"),
+      content: t("api.assets.patch.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+const assetsService = { getAssets, deleteAsset, postAsset, putAsset, patchAsset };
 export default assetsService;

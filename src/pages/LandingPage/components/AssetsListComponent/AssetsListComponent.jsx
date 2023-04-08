@@ -16,7 +16,7 @@ function AssetsListComponent(porps) {
   };
 
   const deleteCompany = async (id) => {
-    await assetsService.deleteAssets(id);
+    await assetsService.deleteAsset(id);
     setAssets(await assetsService.getAssets());
   };
 

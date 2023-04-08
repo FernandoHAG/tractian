@@ -28,7 +28,7 @@ async function deleteCompany(id) {
   return response.data;
 }
 
-async function postCompanies(newCompany) {
+async function postCompany(newCompany) {
   const response = await api.post("", newCompany).catch((error) => {
     Modal.error({
       title: t("api.companies.post.errorTitle"),
@@ -49,6 +49,7 @@ async function putCompany(company) {
   return response.data;
 }
 
+// TODO - Discover what the back wants to recive
 async function patchCompany(company) {
   const response = await api.patch("", company).catch((error) => {
     Modal.error({
@@ -59,5 +60,5 @@ async function patchCompany(company) {
   return response.data;
 }
 
-const companiesService = { getCompanies, deleteCompany, postCompanies, putCompany, patchCompany };
+const companiesService = { getCompanies, deleteCompany, postCompany, putCompany, patchCompany };
 export default companiesService;
