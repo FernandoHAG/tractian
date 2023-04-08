@@ -1,17 +1,18 @@
 import { Form, Input, Modal } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 function PopupModal(props) {
   const { t } = useTranslation();
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
 
   const handleOk = async () => {
     try {
+      setLoading(true);
       if (await form.validateFields()) {
         const values = form.getFieldsValue();
         if (props.company) {
-          console.log(props.company);
           const editedCompany = {
             id: props.company.id,
             name: values.name,
@@ -20,19 +21,29 @@ function PopupModal(props) {
         } else {
           await props.onOk(values);
         }
+        props.onClose();
       }
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
       form.resetFields();
     }
   };
 
   useEffect(() => {
-    form.setFieldsValue({
-      name: props.company ? props.company.name : undefined,
-    });
+    if (props.company) {
+      form.setFieldsValue({ name: props.company.name });
+    } else {
+      form.setFieldsValue({ name: "" });
+    }
   }, [form, props.company]);
+
+  function getInitialValues() {
+    return {
+      name: props.company?.name || "",
+    };
+  }
 
   return (
     <Modal
@@ -40,9 +51,10 @@ function PopupModal(props) {
       open={props.open}
       onCancel={props.onCancel}
       onOk={handleOk}
+      confirmLoading={loading}
       afterClose={props.onClose}
     >
-      <Form form={form} layout="vertical">
+      <Form form={form} layout="vertical" initialValues={getInitialValues()}>
         <Form.Item
           label={t("form.companies.nameLabel")}
           name="name"

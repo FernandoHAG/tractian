@@ -28,7 +28,7 @@ function CompaniesListComponent(porps) {
   };
 
   const handleEditCompany = async (editedCompany) => {
-    await companiesService.putCompany(editedCompany);
+    await companiesService.patchCompany(editedCompany);
     handleCloseModal();
   };
 

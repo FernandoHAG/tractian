@@ -31,24 +31,33 @@ async function deleteCompany(id) {
 async function postCompanies(newCompany) {
   const response = await api.post("", newCompany).catch((error) => {
     Modal.error({
-      title: t("api.companies.POST.errorTitle"),
-      content: t("api.companies.POST.errorBody") + error.message,
+      title: t("api.companies.post.errorTitle"),
+      content: t("api.companies.post.errorBody") + error.message,
     });
   });
   return response.data;
 }
 
 // TODO - Discover what the back wants to recive
-async function putCompany(newCompany) {
-  console.log("PUT-> ", newCompany);
-  // const response = await api.put("", { data: newCompany }).catch((error) => {
-  //   Modal.error({
-  //     title: t("api.companies.put.errorTitle"),
-  //     content: t("api.companies.put.errorBody") + error.message,
-  //   });
-  // });
-  // return response.data;
+async function putCompany(company) {
+  const response = await api.put("", { data: company }).catch((error) => {
+    Modal.error({
+      title: t("api.companies.put.errorTitle"),
+      content: t("api.companies.put.errorBody") + error.message,
+    });
+  });
+  return response.data;
 }
 
-const companiesService = { getCompanies, deleteCompany, postCompanies, putCompany };
+async function patchCompany(company) {
+  const response = await api.patch("", company).catch((error) => {
+    Modal.error({
+      title: t("api.companies.patch.errorTitle"),
+      content: t("api.companies.patch.errorBody") + error.message,
+    });
+  });
+  return response.data;
+}
+
+const companiesService = { getCompanies, deleteCompany, postCompanies, putCompany, patchCompany };
 export default companiesService;

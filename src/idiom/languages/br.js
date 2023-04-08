@@ -14,6 +14,10 @@ const br = {
         errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/assets. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
+      patch: {
+        errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PATCH/assets. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
     },
     companies: {
       get: {
@@ -31,6 +35,11 @@ const br = {
           "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/companies. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
+      patch: {
+        errorBody:
+          "Um erro ocorreu enquanto tentava acessar a API no endpoint PATCH/companies. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
     },
     units: {
       get: {
@@ -45,6 +54,10 @@ const br = {
         errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/units. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
+      patch: {
+        errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PATCH/units. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
     },
     users: {
       get: {
@@ -57,6 +70,10 @@ const br = {
       },
       put: {
         errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/users. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
+      patch: {
+        errorBody: "Um erro ocorreu enquanto tentava acessar a API no endpoint PATCH/users. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
     },
@@ -74,6 +91,11 @@ const br = {
       put: {
         errorBody:
           "Um erro ocorreu enquanto tentava acessar a API no endpoint PUT/workorders. A mensagem de erro é:\n\n",
+        errorTitle: "Erro!",
+      },
+      patch: {
+        errorBody:
+          "Um erro ocorreu enquanto tentava acessar a API no endpoint PATCH/workorders. A mensagem de erro é:\n\n",
         errorTitle: "Erro!",
       },
     },

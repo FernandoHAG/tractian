@@ -13,6 +13,10 @@ const us = {
         errorBody: "An error occurred while accessing the API on endpoint PUT/assets. The error message is:\n\n",
         errorTitle: "Error!",
       },
+      patch: {
+        errorBody: "An error occurred while accessing the API on endpoint PATCH/assets. The error message is:\n\n",
+        errorTitle: "Error!",
+      },
     },
     companies: {
       get: {
@@ -25,6 +29,10 @@ const us = {
       },
       put: {
         errorBody: "An error occurred while accessing the API on endpoint PUT/companies. The error message is:\n\n",
+        errorTitle: "Error!",
+      },
+      patch: {
+        errorBody: "An error occurred while accessing the API on endpoint PATCH/companies. The error message is:\n\n",
         errorTitle: "Error!",
       },
     },
@@ -41,6 +49,10 @@ const us = {
         errorBody: "An error occurred while accessing the API on endpoint PUT/units. The error message is:\n\n",
         errorTitle: "Error!",
       },
+      patch: {
+        errorBody: "An error occurred while accessing the API on endpoint PATCH/units. The error message is:\n\n",
+        errorTitle: "Error!",
+      },
     },
     users: {
       get: {
@@ -55,6 +67,10 @@ const us = {
         errorBody: "An error occurred while accessing the API on endpoint PUT/users. The error message is:\n\n",
         errorTitle: "Error!",
       },
+      patch: {
+        errorBody: "An error occurred while accessing the API on endpoint PATCH/users. The error message is:\n\n",
+        errorTitle: "Error!",
+      },
     },
     workorders: {
       get: {
@@ -67,6 +83,10 @@ const us = {
       },
       put: {
         errorBody: "An error occurred while accessing the API on endpoint PUT/workordes. The error message is:\n\n",
+        errorTitle: "Error!",
+      },
+      patch: {
+        errorBody: "An error occurred while accessing the API on endpoint PATCH/workordes. The error message is:\n\n",
         errorTitle: "Error!",
       },
     },
