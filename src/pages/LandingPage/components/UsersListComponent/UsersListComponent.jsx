@@ -47,16 +47,15 @@ function UsersListComponent(props) {
     }
   }, [users, dispatch, updateData]);
 
-  const usersCallAPI = async () => {
-    setUsers(await usersService.getUsers(updateStore));
-  };
-
   const deleteUser = async (id) => {
     await usersService.deleteUser(id);
     setUsers(await usersService.getUsers(updateStore));
   };
 
   useEffect(() => {
+    const usersCallAPI = async () => {
+      setUsers(await usersService.getUsers(updateStore));
+    };
     usersCallAPI();
   }, []);
 

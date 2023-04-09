@@ -47,16 +47,15 @@ function UnitsListComponent(props) {
     }
   }, [units, dispatch, updateData]);
 
-  const unitsCallAPI = async () => {
-    setUnits(await unitsService.getUnits(updateStore));
-  };
-
   const deleteUnit = async (id) => {
     await unitsService.deleteUnit(id);
     setUnits(await unitsService.getUnits(updateStore));
   };
 
   useEffect(() => {
+    const unitsCallAPI = async () => {
+      setUnits(await unitsService.getUnits(updateStore));
+    };
     unitsCallAPI();
   }, []);
 

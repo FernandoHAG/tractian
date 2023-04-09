@@ -47,16 +47,15 @@ function WorkordersListComponent(props) {
     }
   }, [workorders, dispatch, updateData]);
 
-  const workordersCallAPI = async () => {
-    setWorkorders(await workordersService.getWorkorders(updateStore));
-  };
-
   const deleteWorkorder = async (id) => {
     await workordersService.deleteWorkorder(id);
     setWorkorders(await workordersService.getWorkorders(updateStore));
   };
 
   useEffect(() => {
+    const workordersCallAPI = async () => {
+      setWorkorders(await workordersService.getWorkorders(updateStore));
+    };
     workordersCallAPI();
   }, []);
 

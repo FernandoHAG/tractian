@@ -47,16 +47,15 @@ function AssetsListComponent(props) {
     }
   }, [assets, dispatch, updateData]);
 
-  const assetsCallAPI = async () => {
-    setAssets(await assetsService.getAssets(updateStore));
-  };
-
   const deleteAsset = async (id) => {
     await assetsService.deleteAsset(id);
     setAssets(await assetsService.getAssets(updateStore));
   };
 
   useEffect(() => {
+    const assetsCallAPI = async () => {
+      setAssets(await assetsService.getAssets(updateStore));
+    };
     assetsCallAPI();
   }, []);
 
