@@ -3,7 +3,7 @@ import randonColorGenerator from "../../utils/randonColorGenerator";
 import "./CardComponent.css";
 import { EditOutlined, CloseCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { Popover } from "antd";
+import { Popconfirm, Popover } from "antd";
 import { useTranslation } from "react-i18next";
 
 function CardComponent(props) {
@@ -41,9 +41,11 @@ function CardComponent(props) {
           </Popover>
         )}
         <Popover content={<div>{t("card.del")}</div>}>
-          <li key={"li-delete-" + id} onClick={() => deleteCallBack(id)}>
-            <CloseCircleOutlined />
-          </li>
+          <Popconfirm title={t("card.del")} description={t("card.confirmDelete")} onConfirm={() => deleteCallBack(id)}>
+            <li key={"li-delete-" + id}>
+              <CloseCircleOutlined />
+            </li>
+          </Popconfirm>
         </Popover>
       </ul>
       <div className={"card-info" + (theme === "light" ? " card-info-light" : "")} key={"card-info-" + id}>

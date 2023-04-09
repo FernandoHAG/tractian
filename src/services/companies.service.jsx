@@ -19,6 +19,17 @@ async function getCompanies(callback) {
   return response.data;
 }
 
+async function getCompany(id, callback) {
+  const response = await api.get("/" + id).catch((error) => {
+    Modal.error({
+      title: t("api.companies.get.errorTitle"),
+      content: t("api.companies.get.errorBody") + error.message,
+    });
+  });
+  if (callback) callback(response.data);
+  return response.data;
+}
+
 async function deleteCompany(id) {
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
@@ -47,7 +58,7 @@ async function putCompany(company) {
       content: t("api.companies.put.errorBody") + error.message,
     });
   });
-  return response.data;
+  return response?.data;
 }
 
 // TODO - Discover what the back wants to recive
@@ -58,8 +69,8 @@ async function patchCompany(company) {
       content: t("api.companies.patch.errorBody") + error.message,
     });
   });
-  return response.data;
+  return response?.data;
 }
 
-const companiesService = { getCompanies, deleteCompany, postCompany, putCompany, patchCompany };
+const companiesService = { getCompanies, getCompany, deleteCompany, postCompany, putCompany, patchCompany };
 export default companiesService;

@@ -19,6 +19,17 @@ async function getAssets(callback) {
   return response.data;
 }
 
+async function getAsset(id, callback) {
+  const response = await api.get("/" + id).catch((error) => {
+    Modal.error({
+      title: t("api.assets.get.errorTitle"),
+      content: t("api.assets.get.errorBody") + error.message,
+    });
+  });
+  if (callback) callback(response.data);
+  return response.data;
+}
+
 async function deleteAsset(id) {
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
@@ -47,7 +58,7 @@ async function putAsset(asset) {
       content: t("api.assets.put.errorBody") + error.message,
     });
   });
-  return response.data;
+  return response?.data;
 }
 
 // TODO - Discover what the back wants to recive
@@ -58,8 +69,8 @@ async function patchAsset(asset) {
       content: t("api.assets.patch.errorBody") + error.message,
     });
   });
-  return response.data;
+  return response?.data;
 }
 
-const assetsService = { getAssets, deleteAsset, postAsset, putAsset, patchAsset };
+const assetsService = { getAssets, getAsset, deleteAsset, postAsset, putAsset, patchAsset };
 export default assetsService;

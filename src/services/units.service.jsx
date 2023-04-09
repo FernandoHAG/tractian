@@ -19,6 +19,17 @@ async function getUnits(callback) {
   return response.data;
 }
 
+async function getUnit(id, callback) {
+  const response = await api.get("/" + id).catch((error) => {
+    Modal.error({
+      title: t("api.units.get.errorTitle"),
+      content: t("api.units.get.errorBody") + error.message,
+    });
+  });
+  if (callback) callback(response.data);
+  return response.data;
+}
+
 async function deleteUnit(id) {
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
@@ -47,7 +58,7 @@ async function putUnit(asset) {
       content: t("api.units.put.errorBody") + error.message,
     });
   });
-  return response.data;
+  return response?.data;
 }
 
 // TODO - Discover what the back wants to recive
@@ -58,8 +69,8 @@ async function patchUnit(asset) {
       content: t("api.units.patch.errorBody") + error.message,
     });
   });
-  return response.data;
+  return response?.data;
 }
 
-const unitsService = { getUnits, deleteUnit, postUnit, putUnit, patchUnit };
+const unitsService = { getUnits, getUnit, deleteUnit, postUnit, putUnit, patchUnit };
 export default unitsService;

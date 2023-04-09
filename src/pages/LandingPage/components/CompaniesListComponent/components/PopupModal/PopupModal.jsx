@@ -8,9 +8,10 @@ function PopupModal(props) {
   const [loading, setLoading] = useState(false);
 
   const handleOk = async () => {
+    const isFormValid = await form.validateFields();
     try {
       setLoading(true);
-      if (await form.validateFields()) {
+      if (isFormValid) {
         const values = form.getFieldsValue();
         if (props.company) {
           const editedCompany = {

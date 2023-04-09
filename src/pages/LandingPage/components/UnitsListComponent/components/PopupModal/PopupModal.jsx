@@ -15,9 +15,10 @@ function PopupModal(props) {
   const dispatch = useDispatch();
 
   const handleOk = async () => {
+    const isFormValid = await form.validateFields();
     try {
       setLoading(true);
-      if (await form.validateFields()) {
+      if (isFormValid) {
         const values = form.getFieldsValue();
         console.log(values);
         if (props.unit) {
@@ -28,7 +29,11 @@ function PopupModal(props) {
           };
           await props.onEdit(editedUnit);
         } else {
-          await props.onOk(values);
+          const newUnit = {
+            name: values.name,
+            companyId: values.company,
+          };
+          await props.onOk(newUnit);
         }
         props.onClose();
       }
@@ -70,11 +75,7 @@ function PopupModal(props) {
       }
       getCompanies();
     }
-  }, [props.open]);
-
-  function selectCompany(companyId) {
-    setSelectedCompany(companyId);
-  }
+  }, [dispatch, props.open, props.unit?.companyId]);
 
   return (
     <Modal
@@ -108,7 +109,7 @@ function PopupModal(props) {
             },
           ]}
         >
-          <Select options={options} onSelect={selectCompany} />
+          <Select options={options} onSelect={setSelectedCompany} />
         </Form.Item>
       </Form>
     </Modal>

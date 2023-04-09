@@ -11,11 +11,14 @@ import MainCardPagination from "../../../../components/MainCardPagination/MainCa
 import PopupModal from "./components/PopupModal/PopupModal";
 import { useDispatch } from "react-redux";
 import { usersChange } from "../../../../redux/dataSlice";
+import InfoModal from "./components/infoModal/InfoModal";
 
 function UsersListComponent(props) {
   const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
+  const [infoUserId, setInfoUserId] = useState();
   const [userToEdit, setUserToEdit] = useState(null);
   const [updateData, setUpdateData] = useState(false);
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ function UsersListComponent(props) {
   const handleCloseModal = () => {
     setUserToEdit(null);
     setIsModalVisible(false);
+    setIsInfoModalVisible(false);
   };
 
   const handleCreateUser = async (newUser) => {
@@ -59,8 +63,9 @@ function UsersListComponent(props) {
     usersCallAPI();
   }, []);
 
-  function moreInfoCallback(data) {
-    console.log(data);
+  function moreInfoCallback(userId) {
+    setInfoUserId(userId);
+    setIsInfoModalVisible(true);
   }
 
   const generateCard = () => {
@@ -102,6 +107,7 @@ function UsersListComponent(props) {
         onClose={handleCloseModal}
         user={userToEdit}
       />
+      <InfoModal open={isInfoModalVisible} onClose={handleCloseModal} userId={infoUserId} />
     </MainCard>
   );
 }

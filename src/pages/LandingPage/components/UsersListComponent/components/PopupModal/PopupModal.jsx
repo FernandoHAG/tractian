@@ -20,11 +20,14 @@ function PopupModal(props) {
   const dispatch = useDispatch();
 
   const handleOk = async () => {
+    const isForValid = await form.validateFields();
     try {
       setLoading(true);
-      if (await form.validateFields()) {
+      if (isForValid) {
         const values = form.getFieldsValue();
         if (props.user) {
+          console.log("selectedCompany ", selectedCompany);
+          console.log("selectedUnit ", selectedUnit);
           const editedUser = {
             id: props.user.id,
             name: values.name,
@@ -54,9 +57,14 @@ function PopupModal(props) {
 
   useEffect(() => {
     if (props.user) {
-      form.setFieldsValue({ name: props.user.name, company: userCompany.name, unit: userUnit.name });
+      form.setFieldsValue({
+        name: props.user.name,
+        company: userCompany.name,
+        unit: userUnit.name,
+        email: props.user.email,
+      });
     } else {
-      form.setFieldsValue({ name: "", company: "", unit: "" });
+      form.setFieldsValue({ name: "", company: "", unit: "", email: "" });
     }
   }, [form, props.user, userCompany.name, userUnit.name]);
 
@@ -76,6 +84,7 @@ function PopupModal(props) {
           options.push({ value: company.id, label: company.name });
           if (company.id === props.user?.companyId) {
             setUserCompany(company);
+            setSelectedCompany(company.id);
           }
         });
         setOptionsCompanies(options);
@@ -88,6 +97,7 @@ function PopupModal(props) {
           options.push({ value: unit.id, label: unit.name });
           if (unit.id === props.user?.unitId) {
             setUserUnit(unit);
+            setSelectedUnit(unit.id);
           }
         });
         setOptionsUnits(options);
@@ -95,15 +105,7 @@ function PopupModal(props) {
       getCompanies();
       getUnits();
     }
-  }, [props.open]);
-
-  function selectCompany(companyId) {
-    setSelectedCompany(companyId);
-  }
-
-  function selectUnit(companyId) {
-    setSelectedUnit(companyId);
-  }
+  }, [dispatch, props.open, props.user?.companyId, props.user?.unitId]);
 
   return (
     <Modal
@@ -151,7 +153,7 @@ function PopupModal(props) {
         >
           <Select
             options={optionsCompanies}
-            onSelect={selectCompany}
+            onSelect={setSelectedCompany}
             placeholder={t("form.users.companyPlaceholder")}
           />
         </Form.Item>
@@ -165,7 +167,7 @@ function PopupModal(props) {
             },
           ]}
         >
-          <Select options={optionsUnits} onSelect={selectUnit} placeholder={t("form.users.unitPlaceholder")} />
+          <Select options={optionsUnits} onSelect={setSelectedUnit} placeholder={t("form.users.unitPlaceholder")} />
         </Form.Item>
       </Form>
     </Modal>

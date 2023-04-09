@@ -186,6 +186,17 @@ const br = {
     info: "Informações",
     edit: "Editar",
     del: "Deletar",
+    confirmDelete: "Tem certeza que deseja deletar este item?",
+  },
+  infoModal: {
+    title: "Informações",
+    data: {
+      tabTitle: "Dados",
+      nameLabel: "Nome: ",
+      emailLabel: "E-mail",
+      companyLabel: "Empresa",
+      unitLabel: "Unidade",
+    },
   },
 };
 

@@ -19,6 +19,17 @@ async function getWorkorders(callback) {
   return response.data;
 }
 
+async function getWorkorder(id, callback) {
+  const response = await api.get("/" + id).catch((error) => {
+    Modal.error({
+      title: t("api.workorders.get.errorTitle"),
+      content: t("api.workorders.get.errorBody") + error.message,
+    });
+  });
+  if (callback) callback(response.data);
+  return response.data;
+}
+
 async function deleteWorkorder(id) {
   const response = await api.delete(api.getUri() + "/" + id).catch((error) => {
     Modal.error({
@@ -47,7 +58,7 @@ async function putWorkorder(user) {
       content: t("api.users.put.errorBody") + error.message,
     });
   });
-  return response.data;
+  return response?.data;
 }
 
 // TODO - Discover what the back wants to recive
@@ -58,8 +69,8 @@ async function patchWorkorder(user) {
       content: t("api.users.patch.errorBody") + error.message,
     });
   });
-  return response.data;
+  return response?.data;
 }
 
-const workordersService = { getWorkorders, deleteWorkorder, postWorkorder, putWorkorder, patchWorkorder };
+const workordersService = { getWorkorders, getWorkorder, deleteWorkorder, postWorkorder, putWorkorder, patchWorkorder };
 export default workordersService;

@@ -177,6 +177,17 @@ const us = {
     info: "Information",
     edit: "Edit",
     del: "Delete",
+    confirmDelete: "Are you sure you want to delete this item?",
+  },
+  infoModal: {
+    title: "Information",
+    data: {
+      tabTitle: "Data",
+      nameLabel: "Name: ",
+      emailLabel: "E-mail",
+      companyLabel: "Company",
+      unitLabel: "Unit",
+    },
   },
 };
 
