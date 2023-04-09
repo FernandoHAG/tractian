@@ -10,10 +10,8 @@ function PopupModal(props) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState([]);
-  // const companies = useSelector((state) => state.data.companies);
   const [unitCompany, setUnitCompany] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState([]);
-
   const dispatch = useDispatch();
 
   const handleOk = async () => {

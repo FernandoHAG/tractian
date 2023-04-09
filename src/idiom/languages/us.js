@@ -146,8 +146,8 @@ const us = {
       nameErrorMessage: "Please, inform the name of unit!",
       namePlaceholder: "Type the name of unit",
       companyLabel: "Name of company",
-      companyErrorMessage: "Please, inform the name of company!",
-      companyPlaceholder: "Type the name of company",
+      companyErrorMessage: "Please, select the company!",
+      companyPlaceholder: "Select the company",
     },
     users: {
       modalTitleNew: "New user",
@@ -155,6 +155,15 @@ const us = {
       nameLabel: "Name of user",
       nameErrorMessage: "Please, inform the name of user!",
       namePlaceholder: "Type the name of user",
+      companyLabel: "Name of company",
+      companyErrorMessage: "Please, select the company!",
+      companyPlaceholder: "Select the company",
+      unitLabel: "Name of the unit",
+      unitErrorMessage: "Please, select the unit!",
+      unitPlaceholder: "Select the unit",
+      emailLabel: "E-mail of the user",
+      emailErrorMessage: "Please, inform the e-mail of user!",
+      emailPlaceholder: "Type the e-mail of user",
     },
     workorders: {
       modalTitleNew: "New workorder",
@@ -163,6 +172,11 @@ const us = {
       nameErrorMessage: "Please, inform the name of workorder!",
       namePlaceholder: "Type the name of workorder",
     },
+  },
+  card: {
+    info: "Information",
+    edit: "Edit",
+    del: "Delete",
   },
 };
 

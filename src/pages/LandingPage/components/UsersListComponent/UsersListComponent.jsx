@@ -59,6 +59,10 @@ function UsersListComponent(props) {
     usersCallAPI();
   }, []);
 
+  function moreInfoCallback(data) {
+    console.log(data);
+  }
+
   const generateCard = () => {
     return users.map((user, index) => {
       return (
@@ -75,6 +79,7 @@ function UsersListComponent(props) {
             deleteUser(user?.id);
           }}
           id={user?.id}
+          showExtraDataCallBack={moreInfoCallback}
         />
       );
     });

@@ -1,11 +1,23 @@
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { companiesChange, unitsChange } from "../../../../../../redux/dataSlice";
+import companiesService from "../../../../../../services/companies.service";
+import unitsService from "../../../../../../services/units.service";
 
 function PopupModal(props) {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [optionsCompanies, setOptionsCompanies] = useState([]);
+  const [userCompany, setUserCompany] = useState([]);
+  const [selectedCompany, setSelectedCompany] = useState([]);
+  const [optionsUnits, setOptionsUnits] = useState([]);
+  const [userUnit, setUserUnit] = useState([]);
+  const [selectedUnit, setSelectedUnit] = useState([]);
+
+  const dispatch = useDispatch();
 
   const handleOk = async () => {
     try {
@@ -16,10 +28,19 @@ function PopupModal(props) {
           const editedUser = {
             id: props.user.id,
             name: values.name,
+            email: values.email,
+            companyId: selectedCompany,
+            unitId: selectedUnit,
           };
           await props.onEdit(editedUser);
         } else {
-          await props.onOk(values);
+          const newUser = {
+            name: values.name,
+            email: values.email,
+            companyId: values.company,
+            unitId: values.unit,
+          };
+          await props.onOk(newUser);
         }
         props.onClose();
       }
@@ -33,16 +54,55 @@ function PopupModal(props) {
 
   useEffect(() => {
     if (props.user) {
-      form.setFieldsValue({ name: props.user.name });
+      form.setFieldsValue({ name: props.user.name, company: userCompany.name, unit: userUnit.name });
     } else {
-      form.setFieldsValue({ name: "" });
+      form.setFieldsValue({ name: "", company: "", unit: "" });
     }
-  }, [form, props.user]);
+  }, [form, props.user, userCompany.name, userUnit.name]);
 
   function getInitialValues() {
     return {
       name: props.user?.name || "",
     };
+  }
+
+  useEffect(() => {
+    if (props.open) {
+      async function getCompanies() {
+        const data = await companiesService.getCompanies();
+        dispatch(companiesChange(data));
+        let options = [];
+        data.forEach((company) => {
+          options.push({ value: company.id, label: company.name });
+          if (company.id === props.user?.companyId) {
+            setUserCompany(company);
+          }
+        });
+        setOptionsCompanies(options);
+      }
+      async function getUnits() {
+        const data = await unitsService.getUnits();
+        dispatch(unitsChange(data));
+        let options = [];
+        data.forEach((unit) => {
+          options.push({ value: unit.id, label: unit.name });
+          if (unit.id === props.user?.unitId) {
+            setUserUnit(unit);
+          }
+        });
+        setOptionsUnits(options);
+      }
+      getCompanies();
+      getUnits();
+    }
+  }, [props.open]);
+
+  function selectCompany(companyId) {
+    setSelectedCompany(companyId);
+  }
+
+  function selectUnit(companyId) {
+    setSelectedUnit(companyId);
   }
 
   return (
@@ -66,6 +126,46 @@ function PopupModal(props) {
           ]}
         >
           <Input placeholder={t("form.users.namePlaceholder")} />
+        </Form.Item>
+        <Form.Item
+          label={t("form.users.emailLabel")}
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: t("form.users.emailErrorMessage"),
+            },
+          ]}
+        >
+          <Input placeholder={t("form.users.emailPlaceholder")} />
+        </Form.Item>
+        <Form.Item
+          label={t("form.users.companyLabel")}
+          name="company"
+          rules={[
+            {
+              required: true,
+              message: t("form.users.companyErrorMessage"),
+            },
+          ]}
+        >
+          <Select
+            options={optionsCompanies}
+            onSelect={selectCompany}
+            placeholder={t("form.users.companyPlaceholder")}
+          />
+        </Form.Item>
+        <Form.Item
+          label={t("form.users.unitLabel")}
+          name="unit"
+          rules={[
+            {
+              required: true,
+              message: t("form.users.unitErrorMessage"),
+            },
+          ]}
+        >
+          <Select options={optionsUnits} onSelect={selectUnit} placeholder={t("form.users.unitPlaceholder")} />
         </Form.Item>
       </Form>
     </Modal>

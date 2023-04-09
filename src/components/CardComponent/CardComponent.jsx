@@ -1,13 +1,16 @@
 import { useSelector } from "react-redux";
 import randonColorGenerator from "../../utils/randonColorGenerator";
 import "./CardComponent.css";
-import { EditOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { EditOutlined, CloseCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { Popover } from "antd";
+import { useTranslation } from "react-i18next";
 
 function CardComponent(props) {
   const { theme } = useSelector((state) => state.config);
   const [randomColor] = useState([randonColorGenerator(), randonColorGenerator()]);
-  const { title, subtitle, img, editCallBack, deleteCallBack, id } = props;
+  const { title, subtitle, img, editCallBack, deleteCallBack, id, showExtraDataCallBack } = props;
+  const { t } = useTranslation();
 
   return (
     <div className="card" key={"card-" + id}>
@@ -25,12 +28,23 @@ function CardComponent(props) {
         {img ?? img}
       </div>
       <ul className="action-buttons" key={"ul-" + id} id="icon-component">
-        <li key={"li-edit-" + id}>
-          <EditOutlined onClick={() => editCallBack(id)} />
-        </li>
-        <li key={"li-delete-" + id}>
-          <CloseCircleOutlined onClick={() => deleteCallBack(id)} />
-        </li>
+        <Popover content={<div>{t("card.edit")}</div>}>
+          <li key={"li-edit-" + id} onClick={() => editCallBack(id)}>
+            <EditOutlined />
+          </li>
+        </Popover>
+        {showExtraDataCallBack && (
+          <Popover content={<div>{t("card.info")}</div>}>
+            <li key={"li-info-" + id} onClick={() => showExtraDataCallBack(id)}>
+              <InfoCircleOutlined />
+            </li>
+          </Popover>
+        )}
+        <Popover content={<div>{t("card.del")}</div>}>
+          <li key={"li-delete-" + id} onClick={() => deleteCallBack(id)}>
+            <CloseCircleOutlined />
+          </li>
+        </Popover>
       </ul>
       <div className={"card-info" + (theme === "light" ? " card-info-light" : "")} key={"card-info-" + id}>
         <p className="title" key={"title-" + id}>

@@ -155,8 +155,8 @@ const br = {
       nameErrorMessage: "Por favor, informe o nome da unidade!",
       namePlaceholder: "Digite o nome da unidade",
       companyLabel: "Nome da compania",
-      companyErrorMessage: "Por favor, informe o nome da compania!",
-      companyPlaceholder: "Digite o nome da compania",
+      companyErrorMessage: "Por favor, selecione a compania!",
+      companyPlaceholder: "Selecione a compania",
     },
     users: {
       modalTitleNew: "Nova usuário",
@@ -164,6 +164,15 @@ const br = {
       nameLabel: "Nome do usuário",
       nameErrorMessage: "Por favor, informe o nome do usuário!",
       namePlaceholder: "Digite o nome do usuário",
+      companyLabel: "Nome da compania",
+      companyErrorMessage: "Por favor, selecione a compania!",
+      companyPlaceholder: "Selecione a compania",
+      unitLabel: "Nome da unidade",
+      unitErrorMessage: "Por favor, selecione a unidade!",
+      unitPlaceholder: "Selecione a unidade",
+      emailLabel: "E-mail do usuário",
+      emailErrorMessage: "Por favor, informe o e-mail do usuário!",
+      emailPlaceholder: "Digite o email so usuário",
     },
     workorders: {
       modalTitleNew: "Nova ordem de trabalho",
@@ -172,6 +181,11 @@ const br = {
       nameErrorMessage: "Por favor, informe o nome da ordem de trabalho!",
       namePlaceholder: "Digite o nome da ordem de trabalho",
     },
+  },
+  card: {
+    info: "Informações",
+    edit: "Editar",
+    del: "Deletar",
   },
 };
 
