@@ -9,7 +9,7 @@ import { Button, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
 import PopupModal from "./components/PopupModal/PopupModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { unitsChange } from "../../../../redux/dataSlice";
 
 function UnitsListComponent(props) {
@@ -19,6 +19,9 @@ function UnitsListComponent(props) {
   const [unitToEdit, setUnitToEdit] = useState(null);
   const [updateData, setUpdateData] = useState(false);
   const dispatch = useDispatch();
+  const {
+    data: { companies },
+  } = useSelector((state) => state);
 
   const handleCloseModal = () => {
     setUnitToEdit(null);
@@ -61,11 +64,16 @@ function UnitsListComponent(props) {
 
   const generateCard = () => {
     return units.map((unit, index) => {
+      let companyName = "";
+      companies.forEach((company) => {
+        if (company.id === unit?.companyId) {
+          companyName = company.name;
+        }
+      });
       return (
         <CardComponent
           key={"CardComponent-" + unit?.id}
-          title={t("unitsList.defaultTitle")}
-          subtitle={"from: " + unit?.id}
+          subtitle={t("unitsList.company") + companyName}
           img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{unit?.name}</Title>}
           editCallBack={() => {
             setUnitToEdit(unit);

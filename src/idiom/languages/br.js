@@ -125,6 +125,7 @@ const br = {
   },
   unitsList: {
     defaultTitle: "Unidade",
+    company: "Empresa: ",
   },
   usersList: {
     defaultTitle: "Usuário",
@@ -153,6 +154,9 @@ const br = {
       nameLabel: "Nome da unidade",
       nameErrorMessage: "Por favor, informe o nome da unidade!",
       namePlaceholder: "Digite o nome da unidade",
+      companyLabel: "Nome da compania",
+      companyErrorMessage: "Por favor, informe o nome da compania!",
+      companyPlaceholder: "Digite o nome da compania",
     },
     users: {
       modalTitleNew: "Nova usuário",

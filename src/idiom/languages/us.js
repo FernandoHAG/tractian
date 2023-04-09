@@ -116,6 +116,7 @@ const us = {
   },
   unitsList: {
     defaultTitle: "Unit",
+    company: "Company: ",
   },
   usersList: {
     defaultTitle: "User",
@@ -144,6 +145,9 @@ const us = {
       nameLabel: "Name of unit",
       nameErrorMessage: "Please, inform the name of unit!",
       namePlaceholder: "Type the name of unit",
+      companyLabel: "Name of company",
+      companyErrorMessage: "Please, inform the name of company!",
+      companyPlaceholder: "Type the name of company",
     },
     users: {
       modalTitleNew: "New user",
