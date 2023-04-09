@@ -9,12 +9,16 @@ import { Button, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
 import PopupModal from "./components/PopupModal/PopupModal";
+import { useDispatch } from "react-redux";
+import { unitsChange } from "../../../../redux/dataSlice";
 
-function UnitsListComponent(porps) {
+function UnitsListComponent(props) {
   const { t } = useTranslation();
   const [units, setUnits] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [unitToEdit, setUnitToEdit] = useState(null);
+  const [updateData, setUpdateData] = useState(false);
+  const dispatch = useDispatch();
 
   const handleCloseModal = () => {
     setUnitToEdit(null);
@@ -23,7 +27,7 @@ function UnitsListComponent(porps) {
 
   const handleCreateUnit = async (newUnit) => {
     await unitsService.postUnit(newUnit);
-    setUnits(await unitsService.getUnits());
+    setUnits(await unitsService.getUnits(updateStore));
     handleCloseModal();
   };
 
@@ -32,13 +36,24 @@ function UnitsListComponent(porps) {
     handleCloseModal();
   };
 
+  async function updateStore(newValue) {
+    setUpdateData(true);
+  }
+
+  useEffect(() => {
+    if (updateData) {
+      dispatch(unitsChange(units));
+      setUpdateData(false);
+    }
+  }, [units, dispatch, updateData]);
+
   const unitsCallAPI = async () => {
-    setUnits(await unitsService.getUnits());
+    setUnits(await unitsService.getUnits(updateStore));
   };
 
   const deleteUnit = async (id) => {
     await unitsService.deleteUnit(id);
-    setUnits(await unitsService.getUnits());
+    setUnits(await unitsService.getUnits(updateStore));
   };
 
   useEffect(() => {
@@ -51,7 +66,7 @@ function UnitsListComponent(porps) {
         <CardComponent
           key={"CardComponent-" + unit?.id}
           title={t("unitsList.defaultTitle")}
-          subtitle={"id: " + unit?.id}
+          subtitle={"from: " + unit?.id}
           img={<Title style={{ textAlign: "center", textShadow: "#7a7a7a 1px 1px 20px" }}>{unit?.name}</Title>}
           editCallBack={() => {
             setUnitToEdit(unit);

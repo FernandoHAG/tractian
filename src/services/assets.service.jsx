@@ -8,13 +8,14 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API + "/assets",
 });
 
-async function getAssets() {
+async function getAssets(callback) {
   const response = await api.get("").catch((error) => {
     Modal.error({
       title: t("api.assets.get.errorTitle"),
       content: t("api.assets.get.errorBody") + error.message,
     });
   });
+  if (callback) callback(response.data);
   return response.data;
 }
 

@@ -8,13 +8,14 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API + "/workorders",
 });
 
-async function getWorkorders() {
+async function getWorkorders(callback) {
   const response = await api.get("").catch((error) => {
     Modal.error({
       title: t("api.workorders.get.errorTitle"),
       content: t("api.workorders.get.errorBody") + error.message,
     });
   });
+  if (callback) callback(response.data);
   return response.data;
 }
 

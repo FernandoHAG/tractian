@@ -8,13 +8,14 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API + "/companies",
 });
 
-async function getCompanies() {
+async function getCompanies(callback) {
   const response = await api.get("").catch((error) => {
     Modal.error({
       title: t("api.companies.get.errorTitle"),
       content: t("api.companies.get.errorBody") + error.message,
     });
   });
+  if (callback) callback(response.data);
   return response.data;
 }
 

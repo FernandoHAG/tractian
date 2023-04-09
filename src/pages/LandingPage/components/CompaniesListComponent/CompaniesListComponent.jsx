@@ -9,10 +9,14 @@ import { Button, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
 import PopupModal from "./components/PopupModal/PopupModal";
+import { useDispatch, useSelector } from "react-redux";
+import { companiesChange } from "../../../../redux/dataSlice";
 
-function CompaniesListComponent(porps) {
+function CompaniesListComponent(props) {
   const { t } = useTranslation();
-  const [companies, setCompanies] = useState([]);
+  const companies = useSelector((state) => state.data.companies);
+  const dispatch = useDispatch();
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [companyToEdit, setCompanyToEdit] = useState(null);
 
@@ -23,7 +27,6 @@ function CompaniesListComponent(porps) {
 
   const handleCreateCompany = async (newCompany) => {
     await companiesService.postCompany(newCompany);
-    setCompanies(await companiesService.getCompanies());
     handleCloseModal();
   };
 
@@ -32,18 +35,22 @@ function CompaniesListComponent(porps) {
     handleCloseModal();
   };
 
-  const companiesCallAPI = async () => {
-    setCompanies(await companiesService.getCompanies());
-  };
-
   const deleteCompany = async (id) => {
     await companiesService.deleteCompany(id);
-    setCompanies(await companiesService.getCompanies());
   };
 
   useEffect(() => {
-    companiesCallAPI();
-  }, []);
+    async function getCompanies() {
+      if (!companies || companies.length === 0) {
+        const data = await companiesService.getCompanies();
+        dispatch(companiesChange(data));
+      }
+    }
+
+    if (!companies || companies.length === 0) {
+      getCompanies();
+    }
+  }, [companies, dispatch]);
 
   const generateCard = () => {
     return companies.map((company, index) => {

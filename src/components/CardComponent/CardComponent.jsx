@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import randonColorGenerator from "../../utils/randonColorGenerator";
 import "./CardComponent.css";
 import { EditOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 function CardComponent(props) {
   const { theme } = useSelector((state) => state.config);
-  const randonColorArray = [randonColorGenerator(), randonColorGenerator()];
+  const [randomColor] = useState([randonColorGenerator(), randonColorGenerator()]);
   const { title, subtitle, img, editCallBack, deleteCallBack, id } = props;
 
   return (
@@ -13,7 +14,7 @@ function CardComponent(props) {
       <div
         className="card-img"
         style={{
-          background: `linear-gradient(to top, ${randonColorArray[0]} 0%, ${randonColorArray[1]} 100%)`,
+          background: `linear-gradient(to top, ${randomColor[0]} 0%, ${randomColor[1]} 100%)`,
           boxShadow:
             theme === "dark"
               ? "rgb(255 255 255 / 11%) 0px 0px 20px 5px, rgb(0, 0, 0) 0px 0px 20px 1px inset"

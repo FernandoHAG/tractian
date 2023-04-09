@@ -9,12 +9,16 @@ import { Button, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
 import PopupModal from "./components/PopupModal/PopupModal";
+import { useDispatch } from "react-redux";
+import { workordersChange } from "../../../../redux/dataSlice";
 
-function WorkordersListComponent(porps) {
+function WorkordersListComponent(props) {
   const { t } = useTranslation();
   const [workorders, setWorkorders] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [workorderToEdit, setWorkorderToEdit] = useState(null);
+  const [updateData, setUpdateData] = useState(false);
+  const dispatch = useDispatch();
 
   const handleCloseModal = () => {
     setWorkorderToEdit(null);
@@ -23,7 +27,7 @@ function WorkordersListComponent(porps) {
 
   const handleCreateWorkorder = async (newWorkorder) => {
     await workordersService.postWorkorder(newWorkorder);
-    setWorkorders(await workordersService.getWorkorders());
+    setWorkorders(await workordersService.getWorkorders(updateStore));
     handleCloseModal();
   };
 
@@ -32,13 +36,24 @@ function WorkordersListComponent(porps) {
     handleCloseModal();
   };
 
+  async function updateStore(newValue) {
+    setUpdateData(true);
+  }
+
+  useEffect(() => {
+    if (updateData) {
+      dispatch(workordersChange(workorders));
+      setUpdateData(false);
+    }
+  }, [workorders, dispatch, updateData]);
+
   const workordersCallAPI = async () => {
-    setWorkorders(await workordersService.getWorkorders());
+    setWorkorders(await workordersService.getWorkorders(updateStore));
   };
 
   const deleteWorkorder = async (id) => {
     await workordersService.deleteWorkorder(id);
-    setWorkorders(await workordersService.getWorkorders());
+    setWorkorders(await workordersService.getWorkorders(updateStore));
   };
 
   useEffect(() => {

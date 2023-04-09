@@ -12,7 +12,9 @@ import UsersListComponent from "./components/UsersListComponent/UsersListCompone
 import WorkordersListComponent from "./components/WorkordersListComponent/WorkordersListComponent";
 
 function LandingPage() {
-  const { theme, selectedTab } = useSelector((state) => state.config);
+  const {
+    config: { theme, selectedTab },
+  } = useSelector((state) => state);
   let crouselRef;
 
   useEffect(() => {

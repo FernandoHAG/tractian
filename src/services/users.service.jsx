@@ -8,13 +8,14 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API + "/users",
 });
 
-async function getUsers() {
+async function getUsers(callback) {
   const response = await api.get("").catch((error) => {
     Modal.error({
       title: t("api.users.get.errorTitle"),
       content: t("api.users.get.errorBody") + error.message,
     });
   });
+  if (callback) callback(response.data);
   return response.data;
 }
 

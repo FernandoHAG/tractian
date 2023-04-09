@@ -9,12 +9,16 @@ import { Button, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
 import PopupModal from "./components/PopupModal/PopupModal";
+import { useDispatch } from "react-redux";
+import { usersChange } from "../../../../redux/dataSlice";
 
-function UsersListComponent(porps) {
+function UsersListComponent(props) {
   const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userToEdit, setUserToEdit] = useState(null);
+  const [updateData, setUpdateData] = useState(false);
+  const dispatch = useDispatch();
 
   const handleCloseModal = () => {
     setUserToEdit(null);
@@ -23,7 +27,7 @@ function UsersListComponent(porps) {
 
   const handleCreateUser = async (newUser) => {
     await usersService.postUser(newUser);
-    setUsers(await usersService.getUsers());
+    setUsers(await usersService.getUsers(updateStore));
     handleCloseModal();
   };
 
@@ -32,13 +36,24 @@ function UsersListComponent(porps) {
     handleCloseModal();
   };
 
+  async function updateStore(newValue) {
+    setUpdateData(true);
+  }
+
+  useEffect(() => {
+    if (updateData) {
+      dispatch(usersChange(users));
+      setUpdateData(false);
+    }
+  }, [users, dispatch, updateData]);
+
   const usersCallAPI = async () => {
-    setUsers(await usersService.getUsers());
+    setUsers(await usersService.getUsers(updateStore));
   };
 
   const deleteUser = async (id) => {
     await usersService.deleteUser(id);
-    setUsers(await usersService.getUsers());
+    setUsers(await usersService.getUsers(updateStore));
   };
 
   useEffect(() => {

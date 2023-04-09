@@ -8,13 +8,14 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API + "/units",
 });
 
-async function getUnits() {
+async function getUnits(callback) {
   const response = await api.get("").catch((error) => {
     Modal.error({
       title: t("api.units.get.errorTitle"),
       content: t("api.units.get.errorBody") + error.message,
     });
   });
+  if (callback) callback(response.data);
   return response.data;
 }
 

@@ -9,12 +9,16 @@ import { Button, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
 import PopupModal from "./components/PopupModal/PopupModal";
+import { assetsChange } from "../../../../redux/dataSlice";
+import { useDispatch } from "react-redux";
 
-function AssetsListComponent(porps) {
+function AssetsListComponent(props) {
   const { t } = useTranslation();
   const [assets, setAssets] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [assetToEdit, setAssetToEdit] = useState(null);
+  const [updateData, setUpdateData] = useState(false);
+  const dispatch = useDispatch();
 
   const handleCloseModal = () => {
     setAssetToEdit(null);
@@ -23,7 +27,7 @@ function AssetsListComponent(porps) {
 
   const handleCreateAsset = async (newAsset) => {
     await assetsService.postAsset(newAsset);
-    setAssets(await assetsService.getAssets());
+    setAssets(await assetsService.getAssets(updateStore));
     handleCloseModal();
   };
 
@@ -32,13 +36,24 @@ function AssetsListComponent(porps) {
     handleCloseModal();
   };
 
+  async function updateStore(newValue) {
+    setUpdateData(true);
+  }
+
+  useEffect(() => {
+    if (updateData) {
+      dispatch(assetsChange(assets));
+      setUpdateData(false);
+    }
+  }, [assets, dispatch, updateData]);
+
   const assetsCallAPI = async () => {
-    setAssets(await assetsService.getAssets());
+    setAssets(await assetsService.getAssets(updateStore));
   };
 
   const deleteAsset = async (id) => {
     await assetsService.deleteAsset(id);
-    setAssets(await assetsService.getAssets());
+    setAssets(await assetsService.getAssets(updateStore));
   };
 
   useEffect(() => {

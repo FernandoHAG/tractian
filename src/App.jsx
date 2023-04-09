@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import { ConfigProvider, theme as antTheme } from "antd";
@@ -10,7 +10,7 @@ function App() {
   const [isLightMode, setIsLightMode] = useState(theme === "light");
 
   useEffect(() => {
-    setIsLightMode((i) => !i);
+    setIsLightMode(theme === "light");
   }, [theme]);
 
   return (
@@ -21,7 +21,7 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />}>
+          <Route path="/" element={<LandingPage />} exact>
             <Route index element={<LandingPage />} />
             <Route path="*" element={<LandingPage />} />
           </Route>

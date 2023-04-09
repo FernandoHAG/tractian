@@ -26,12 +26,12 @@ export const slice = createSlice({
     usersChange(state, { payload }) {
       return { ...state, users: payload };
     },
-    workordesChange(state, { payload }) {
+    workordersChange(state, { payload }) {
       return { ...state, workordes: payload };
     },
   },
 });
 
-export const { assetsChange, companiesChange, unitsChange, usersChange, workordesChange } = slice.actions;
+export const { assetsChange, companiesChange, unitsChange, usersChange, workordersChange } = slice.actions;
 export const selectData = (state) => state.data;
 export default slice.reducer;
