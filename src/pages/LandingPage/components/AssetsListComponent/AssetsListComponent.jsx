@@ -9,13 +9,16 @@ import { Button, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import MainCardPagination from "../../../../components/MainCardPagination/MainCardPagination";
 import PopupModal from "./components/PopupModal/PopupModal";
-import { assetsChange } from "../../../../redux/dataSlice";
 import { useDispatch } from "react-redux";
+import { assetsChange } from "../../../../redux/dataSlice";
+import InfoModal from "./components/infoModal/InfoModal";
 
 function AssetsListComponent(props) {
   const { t } = useTranslation();
   const [assets, setAssets] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
+  const [infoAssetId, setInfoAssetId] = useState();
   const [assetToEdit, setAssetToEdit] = useState(null);
   const [updateData, setUpdateData] = useState(false);
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ function AssetsListComponent(props) {
   const handleCloseModal = () => {
     setAssetToEdit(null);
     setIsModalVisible(false);
+    setIsInfoModalVisible(false);
   };
 
   const handleCreateAsset = async (newAsset) => {
@@ -59,6 +63,11 @@ function AssetsListComponent(props) {
     assetsCallAPI();
   }, []);
 
+  function moreInfoCallback(assetId) {
+    setInfoAssetId(assetId);
+    setIsInfoModalVisible(true);
+  }
+
   const generateCard = () => {
     return assets.map((asset, index) => {
       return (
@@ -75,6 +84,7 @@ function AssetsListComponent(props) {
             deleteAsset(asset?.id);
           }}
           id={asset?.id}
+          showExtraDataCallBack={moreInfoCallback}
         />
       );
     });
@@ -97,6 +107,7 @@ function AssetsListComponent(props) {
         onClose={handleCloseModal}
         asset={assetToEdit}
       />
+      <InfoModal open={isInfoModalVisible} onClose={handleCloseModal} assetId={infoAssetId} />
     </MainCard>
   );
 }
