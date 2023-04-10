@@ -26,7 +26,6 @@ function InfoModal(props) {
   }, [props.open, props.assetId]);
 
   useEffect(() => {
-    console.log(asset);
     async function getCompany() {
       if (asset?.companyId) setCompany(await companiesService.getCompany(asset.companyId));
     }
@@ -134,7 +133,6 @@ function InfoModal(props) {
   }
 
   function graphsTab() {
-    // Highcharts.chart("container", HighchartsOptions);
     if (asset?.healthHistory) return <MachineStatusChart data={asset?.healthHistory} />;
   }
 

@@ -26,8 +26,6 @@ function PopupModal(props) {
       if (isForValid) {
         const values = form.getFieldsValue();
         if (props.user) {
-          console.log("selectedCompany ", selectedCompany);
-          console.log("selectedUnit ", selectedUnit);
           const editedUser = {
             id: props.user.id,
             name: values.name,
